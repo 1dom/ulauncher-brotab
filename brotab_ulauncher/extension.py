@@ -19,8 +19,6 @@ from ulauncher.api.shared.action.OpenUrlAction import OpenUrlAction
 from brotab_ulauncher.client import BrotabClient
 from brotab_ulauncher.listeners import KeywordQueryEventListener, ItemEnterEventListener
 
-DISPLAY_MAX_RESULTS = 10
-
 
 class BrotabExtension(Extension):
     """ Main Extension Class  """
@@ -64,7 +62,7 @@ class BrotabExtension(Extension):
         items = []
         tabs = self.brotab_client.search_tabs(event.get_argument())
 
-        for tab in tabs[:DISPLAY_MAX_RESULTS]:
+        for tab in tabs[:extension.preferences["max_results"]]:
             data = {"tab": tab["prefix"], "mode": self.mode}
 
             if extension.preferences["show_url"] == "Yes":
