@@ -62,7 +62,9 @@ class BrotabExtension(Extension):
         items = []
         tabs = self.brotab_client.search_tabs(event.get_argument())
 
-        for tab in tabs[:extension.preferences["max_results"]]:
+        max_results = int(extension.preferences["max_results"])
+
+        for tab in tabs[:max_results]:
             data = {"tab": tab["prefix"], "mode": self.mode}
 
             if extension.preferences["show_url"] == "Yes":
